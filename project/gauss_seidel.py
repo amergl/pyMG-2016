@@ -5,8 +5,8 @@ import scipy.sparse.linalg as spLA
 from pymg.smoother_base import SmootherBase
 
 
-class WeightedJacobi(SmootherBase):
-    """Implementation of the weighted Jacobian iteration
+class GaussSeidel(SmootherBase):
+    """Implementation of the Gauss-Seidel iteration
 
     Attributes:
         P (scipy.sparse.csc_matrix): Preconditioner
@@ -22,10 +22,9 @@ class WeightedJacobi(SmootherBase):
             *args: Variable length argument list
             **kwargs: Arbitrary keyword arguments
         """
-        super(WeightedJacobi, self).__init__(A, *args, **kwargs)
+        super(GaussSeidel, self).__init__(A, *args, **kwargs)
 
-        self.P = sp.spdiags(self.A.diagonal(), 0, self.A.shape[0], self.A.shape[1],
-                            format='csc')
+        self.P = sp.tril(self.A, format='csc')
         # precompute inverse of the preconditioner for later usage
         self.Pinv = omega * spLA.inv(self.P)
 
