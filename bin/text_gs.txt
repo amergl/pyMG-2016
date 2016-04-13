@@ -1,0 +1,11 @@
+Loesung Gauss-Seidel Aufgabe:
+
+Zweite Fourier-Mode:
+       Die zweite Fourier-Mode ist niederfrequent und ist daher sehr glatt. Auch die mehrfache Iteration bringt keine grosse Aenderung.
+
+
+16te Fourier-Mode:
+     Die Fourier-Mode ist zwar immernoch niederfrequent, man kann aber trotzdem eine Oszillation erkennen. Die mehrfache Iteration daempft diese aber sehr stark.
+
+Mittel aus den Fourier-Moden:
+       Der Mittelwert von den Fourier-Moden zeigt deutlich, dass bei der mehrfachen Iteration zwar die hochfrequenten Anteile sehr stark gedaempt werden, die niederfrequenten aber dennoch bleiben.

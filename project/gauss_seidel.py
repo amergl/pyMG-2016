@@ -26,7 +26,7 @@ class GaussSeidel(SmootherBase):
 
         self.P = sp.tril(self.A, format='csc')
         # precompute inverse of the preconditioner for later usage
-        self.Pinv = omega * spLA.inv(self.P)
+        self.Pinv = spLA.inv(self.P)
 
     def smooth(self, rhs, u_old):
         """
