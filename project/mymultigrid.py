@@ -115,3 +115,31 @@ class MyMultigrid(MultigridBase):
             self.vh[level] = self.smoo[level].smooth(self.fh[level], self.vh[level])
 
         return self.vh[level]
+
+
+    def do_fmg_cycle(self, rhs, nu0 = 1, nu1, nu2, level):
+
+        """Implementation of a FMG-cycle
+
+        Args:
+            v0 (numpy.array): initial values on finest level
+            rhs (numpy.array): right-hand side on finest level
+            nu1 (int): number of downward smoothing steps
+            nu2 (int): number of upward smoothing steps
+            level (int): current level
+
+        Returns:
+            numpy.array: solution vector on current level
+        """
+
+        self.fh[level]=rhs
+        for i in range(level+1,self.nlevels):
+            self.fh[i] = self.trans[i-1].restrict(self.fh[i-1] -
+                                                          self.smoo[i-1].A.dot(self.vh[i-1]))
+
+
+        self.vh[self.nlevels-2] += self.trans[self.nlevels-1].prolong(np.zeros(self.vh[self.nlevels-1]))
+        for i in range(self.nlevels-2,level):
+            do_v_cycle_recursive(self, self.vh[i], self.fh[i] , nu1, nu2, i)
+            
+        return self.vh[0]
