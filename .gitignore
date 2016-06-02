@@ -60,3 +60,9 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+cover/
+docs/source
+notebooks/html/
+notebooks/temp
+project/#helmholtz1d.py#
+project/helmholtz1d.py~
